@@ -1,0 +1,323 @@
+// Encapuslation
+
+package com.prakash;
+class Student
+{
+	private int rollno;
+	private String name;//these private variables can assigned or accessed only using methods
+	public int getRollno() {         // Encapsulation is binding data through methods
+		return rollno;
+	}
+	public void setRollno(int rollno) {
+		System.out.println("The user is changing the value");
+		this.rollno = rollno;             // The need of encapsulation is to be ensure that the data is safe
+		                                   // when data is public any one can access 
+	}                                     // so by keeping it as private it changed by method & we also let
+	                                       //to know that the user is changing the value
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+}
+public class EncapsulationImp {
+
+	public static void main(String[] args) {
+		
+
+		
+		Student s1 = new Student();
+		s1.setRollno(112);
+		s1.setName("Halls");
+		
+		System.out.println(s1.getRollno()+" "+s1.getName());
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Inheritance
+package com.prakash;
+class Calc
+{
+	public int add(int i,int j)
+	{
+		return i+j;
+	}
+}
+class CalcAdv extends Calc
+{
+	public int sub(int i,int j)
+	{
+		return i-j;
+	}
+}
+class CalcVeryAdv extends CalcAdv
+{
+	public int mul(int i,int j)
+	{
+		return i*j;
+	}
+}
+
+public class MultiLevelInheritance {
+
+	public static void main(String[] args) {
+		
+		CalcVeryAdv obj = new CalcVeryAdv();
+		System.out.println(obj.add(1, 2));
+		System.out.println(obj.sub(2, 1));
+		System.out.println(obj.mul(3, 4));
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//POLYMORPHISM
+package com.prakash;
+class A
+{
+	void show()
+	{
+		System.out.println("in A");
+	}
+}
+class B extends A
+{
+	void show()
+	{
+		System.out.println("in B");
+	}
+	void config()
+	{
+		System.out.println("in config");
+	}
+}
+class C extends B
+{
+	void show()
+	{
+		System.out.println("in C");
+	}
+}
+public class OverRidingExample {
+
+	public static void main(String[] args) {
+		
+		A obj = new B();// creating obj with reference to A class to B class
+		obj.show();
+		
+		obj = new C();
+		obj.show();
+	//	obj.config() This gives an error because config doesnt present in A class
+		   //
+
+	}
+
+}
+
+
+
+// Abstraction
+package com.prakash;
+
+ class Sanjay
+{
+	public void print(Number i)// Number is an abstract class // Integer also extends number //Float also extends Number
+	                    
+	{
+		System.out.println(i); // So only 1 method is enough for passing all type of arguments
+	}
+}
+abstract class Writer
+{
+	abstract void show();
+	
+}
+class Pen extends Writer
+{
+	void show()            // Integer or Float both extends Number so we can pass Number .This example is same as it is
+	{
+		System.out.println("Im pen");
+	}
+}
+class Pencil extends Writer
+{
+	void show()
+	{
+		System.out.println("Im pencil");
+	}
+}
+class Kit 
+{
+	void doSomething(Writer w)
+	{
+		w.show();
+	}
+
+	
+}
+
+public class AbstractionAnotherDemo {
+
+	public static void main(String[] args) {
+		
+		//Sanjay s1 = new Sanjay();
+		//s1.print(5);
+	//	s1.print(5.5);
+		 
+		Kit k = new Kit();
+		Writer p= new Pen();
+		Writer pc = new Pencil();
+		
+		k.doSomething(p);
+		k.doSomething(pc);
+
+	}
+
+}
+package com.prakash;
+abstract class Human
+{
+	public abstract void show();
+	
+	
+	void walk()
+	{
+		
+	}
+	
+}
+class Men extends Human
+{
+	public void show()// When we extend an abstract class we should define the abstract method
+	                   // Other wise this sub class will also changed as abstract class
+	{
+		System.out.println("In subclass");
+	}
+}
+public class AbstractionDemo {
+
+	public static void main(String[] args) {
+		
+	//	Human obj1 = new Human();// we cannot create object for abstract class
+		Human obj = new Men();
+		obj.show();
+
+	}
+
+}
+
+
+// Interface
+package com.prakash;
+interface Demo
+{
+	default void show() // default key word is used to define a method in interface
+	{
+		System.out.println("In Demo Show");
+	}
+}
+interface MyDemo
+{
+	default void show()
+	{
+		System.out.println("In MyDemo Show");
+	}
+}
+class DemoImp implements Demo,MyDemo
+{
+	public void show()
+	{
+		Demo.super.show();
+		MyDemo.super.show();
+	}
+}
+public class MultipleInheritanceIssue {
+
+	public static void main(String[] args) {
+		
+		Demo obj = new DemoImp();
+		obj.show();
+
+	}
+
+}
+
+package com.prakash;
+
+//Types of Interface
+// 1.Normal Interface-Which has more than 2 method
+//2.single abstract interface-Which has only 1 abstract method
+//      |->functional interface - Lambda expressions
+//3.Marker Interface -Which does not have any methods
+
+
+
+interface Abc
+{
+	void show();
+	// it assume it has an abstract method// we can only declare the class// we cannot define the class
+}
+class Implementor implements Abc
+{
+	public void show()
+	{
+		System.out.println("Implemented");
+	}
+
+}
+public class InterfaceDemo {
+
+	public static void main(String[] args) {
+		
+		Abc obj = new Implementor(); // we can create object for interface by creating an another class
+		obj.show();
+		
+		
+		//The another way to create a object for interface is by using anonymous class
+		
+		Abc obj1 = new Abc()
+				{
+		    	public void show()
+			    {
+		    		
+				   System.out.println("Implemented using anonymous");
+			     }
+				};
+
+				
+				obj1.show();
+
+	}
+
+}
+
