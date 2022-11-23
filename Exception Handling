@@ -1,0 +1,41 @@
+ EXCEPTION HANDLING
+package com.prakash;
+
+public class ExceptionHandlingDemo {
+
+	public static void main(String[] args) {
+
+		try
+		{
+			int[] arr= new int[6];
+			arr[6]=13;
+			int i=13;
+			int j=0;
+			int k=i/j;
+			
+			
+		}
+		catch(ArithmeticException e)
+		{
+			System.out.println("Zero division Exception");
+		}
+		catch(ArrayIndexOutOfBoundsException e)
+		{
+			System.out.println("Limit Exceeded..");
+		}
+		catch(Exception e)// When we give it before the first catch block it gives error
+		                   // because (Exception e) extends or handle all Exception
+		{
+			System.out.println("Any other Exception");
+		}
+		finally
+		{
+			System.out.println("Finally Block");
+		}
+
+		
+		
+
+	}
+
+}
